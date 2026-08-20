@@ -54,9 +54,12 @@ powershell -ExecutionPolicy Bypass -File scripts\download_models.ps1
    - [workflows/wan2.2_5b_i2v.json](workflows/wan2.2_5b_i2v.json) — 5B, 빠른 실험용 (24fps, 최대 121프레임)
    - [workflows/wan2.2_14b_i2v.json](workflows/wan2.2_14b_i2v.json) — 14B 고품질 (16fps, 81프레임≈5초,
      4-step LoRA 기본 ON. 서브그래프의 `enable_turbo_mode`를 끄면 20스텝 고품질 모드)
-   - [workflows/wan2.2_14b_i2v_10s.json](workflows/wan2.2_14b_i2v_10s.json) — 14B **10초** 버전.
-     5초 클립 2개를 자동 생성·연결 (1구간 마지막 프레임 → 2구간 시작 이미지).
-     구간별 프롬프트 노드가 따로 있어 전/후반 동작을 다르게 지시 가능. 생성 시간 약 2배.
+   - [workflows/wan2.2_14b_i2v_10s.json](workflows/wan2.2_14b_i2v_10s.json) — 14B **10초** (2구간 이어붙이기)
+   - [workflows/wan2.2_14b_i2v_20s.json](workflows/wan2.2_14b_i2v_20s.json) — 14B **20초** (4구간 이어붙이기)
+
+   이어붙이기 버전은 5초 클립을 자동 생성·연결한다 (각 구간 마지막 프레임 → 다음 구간 시작
+   이미지). 구간별 프롬프트 노드가 따로 있어 시간대마다 다른 동작을 지시할 수 있다.
+   생성 시간은 구간 수에 비례 (1구간 약 4분). 구간이 늘수록 색감·디테일 표류가 누적될 수 있다.
 3. **LoadImage** 노드에 시작 이미지 업로드 → 긍정 프롬프트 입력 → **Queue** 실행
 4. 결과는 `C:\comfyui\ComfyUI\output\video\` 에 mp4로 저장됨
 
