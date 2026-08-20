@@ -1,8 +1,8 @@
 {
   "id": "ec7da562-7e21-4dac-a0d2-f4441e1efd3b",
   "revision": 0,
-  "last_node_id": 901,
-  "last_link_id": 303,
+  "last_node_id": 910,
+  "last_link_id": 310,
   "nodes": [
     {
       "id": 105,
@@ -671,7 +671,7 @@
                 "localized_name": "images",
                 "name": "images",
                 "type": "IMAGE",
-                "link": 182
+                "link": 310
               },
               {
                 "localized_name": "audio",
@@ -687,7 +687,7 @@
                 "widget": {
                   "name": "fps"
                 },
-                "link": 283
+                "link": null
               }
             ],
             "outputs": [
@@ -718,7 +718,7 @@
               }
             },
             "widgets_values": [
-              16,
+              32,
               8
             ]
           },
@@ -2416,8 +2416,7 @@
                 "name": "FLOAT",
                 "type": "FLOAT",
                 "links": [
-                  280,
-                  283
+                  280
                 ]
               }
             ],
@@ -2599,6 +2598,57 @@
               "Node name for S&R": "GetImageSize"
             },
             "widgets_values": []
+          },
+          {
+            "id": 910,
+            "type": "RIFE VFI",
+            "pos": [
+              140,
+              660
+            ],
+            "size": [
+              300,
+              240
+            ],
+            "flags": {},
+            "order": 90,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "frames",
+                "type": "IMAGE",
+                "link": 182
+              },
+              {
+                "name": "optional_interpolation_states",
+                "type": "INTERPOLATION_STATES",
+                "link": null,
+                "shape": 7
+              }
+            ],
+            "outputs": [
+              {
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  310
+                ]
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "RIFE VFI"
+            },
+            "widgets_values": [
+              "rife49.pth",
+              10,
+              2,
+              true,
+              true,
+              1.0,
+              "float32",
+              false,
+              1
+            ]
           }
         ],
         "groups": [
@@ -2692,7 +2742,7 @@
             "id": 182,
             "origin_id": 87,
             "origin_slot": 0,
-            "target_id": 94,
+            "target_id": 910,
             "target_slot": 0,
             "type": "IMAGE"
           },
@@ -3057,14 +3107,6 @@
             "type": "FLOAT"
           },
           {
-            "id": 283,
-            "origin_id": 162,
-            "origin_slot": 0,
-            "target_id": 94,
-            "target_slot": 2,
-            "type": "FLOAT"
-          },
-          {
             "id": 285,
             "origin_id": -10,
             "origin_slot": 3,
@@ -3159,6 +3201,14 @@
             "target_id": 98,
             "target_slot": 6,
             "type": "INT"
+          },
+          {
+            "id": 310,
+            "origin_id": 910,
+            "origin_slot": 0,
+            "target_id": 94,
+            "target_slot": 0,
+            "type": "IMAGE"
           }
         ],
         "extra": {

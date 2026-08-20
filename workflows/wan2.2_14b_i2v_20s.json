@@ -1,8 +1,8 @@
 {
   "id": "c4b2d3e5-0000-4000-8000-wan14b20s000",
   "revision": 0,
-  "last_node_id": 43,
-  "last_link_id": 89,
+  "last_node_id": 44,
+  "last_link_id": 90,
   "nodes": [
     {
       "id": 1,
@@ -2066,6 +2066,54 @@
     },
     {
       "id": 42,
+      "type": "RIFE VFI",
+      "pos": [
+        1200,
+        1480
+      ],
+      "size": [
+        300,
+        240
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "frames",
+          "type": "IMAGE",
+          "link": 88
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            89
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.45",
+        "Node name for S&R": "RIFE VFI"
+      },
+      "widgets_values": [
+        "rife49.pth",
+        10,
+        2,
+        true,
+        true,
+        1.0,
+        "float32",
+        false,
+        1
+      ],
+      "title": "RIFE 16-32fps"
+    },
+    {
+      "id": 43,
       "type": "CreateVideo",
       "pos": [
         1500,
@@ -2076,13 +2124,13 @@
         90
       ],
       "flags": {},
-      "order": 42,
+      "order": 43,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 88
+          "link": 89
         },
         {
           "name": "audio",
@@ -2096,7 +2144,7 @@
           "name": "VIDEO",
           "type": "VIDEO",
           "links": [
-            89
+            90
           ]
         }
       ],
@@ -2106,11 +2154,11 @@
         "Node name for S&R": "CreateVideo"
       },
       "widgets_values": [
-        16
+        32
       ]
     },
     {
-      "id": 43,
+      "id": 44,
       "type": "SaveVideo",
       "pos": [
         1800,
@@ -2121,13 +2169,13 @@
         300
       ],
       "flags": {},
-      "order": 43,
+      "order": 44,
       "mode": 0,
       "inputs": [
         {
           "name": "video",
           "type": "VIDEO",
-          "link": 89
+          "link": 90
         }
       ],
       "outputs": [],
@@ -2853,6 +2901,14 @@
       42,
       0,
       43,
+      0,
+      "IMAGE"
+    ],
+    [
+      90,
+      43,
+      0,
+      44,
       0,
       "VIDEO"
     ]
