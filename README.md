@@ -21,7 +21,21 @@ Wan 계열 image-to-video 모델을 로컬(Windows)에서 돌리기 위한 **환
 
 ### 1. ComfyUI 설치
 
-_(예정 — `scripts/` 의 설치 스크립트 실행)_
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\install_comfyui.ps1
+```
+
+- ComfyUI Windows Portable(NVIDIA, 버전 고정: 스크립트의 `$Version` 참조, 약 2GB)을 받아
+  `C:\comfyui` 에 설치한다. 내장 Python + PyTorch(CUDA) 포함이라 별도 Python 설치 불필요.
+- 압축 해제는 7-Zip이 있으면 사용, 없으면 Windows 내장 `tar` 로 시도한다.
+
+실행:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\run_comfyui.ps1
+```
+
+브라우저에서 `http://127.0.0.1:8188` 접속.
 
 ### 2. Wan 모델 다운로드
 
