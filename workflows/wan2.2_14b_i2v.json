@@ -567,7 +567,7 @@
                 "name": "start_image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 186
+                "link": 300
               },
               {
                 "localized_name": "width",
@@ -576,7 +576,7 @@
                 "widget": {
                   "name": "width"
                 },
-                "link": 239
+                "link": 302
               },
               {
                 "localized_name": "height",
@@ -585,7 +585,7 @@
                 "widget": {
                   "name": "height"
                 },
-                "link": 240
+                "link": 303
               },
               {
                 "localized_name": "length",
