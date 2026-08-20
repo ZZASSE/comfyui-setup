@@ -39,7 +39,13 @@ powershell -ExecutionPolicy Bypass -File scripts\run_comfyui.ps1
 
 ### 2. Wan 모델 다운로드
 
-_(예정 — 모델 선정 후 `scripts/` 의 다운로드 스크립트 실행. 모델 목록은 [docs/models.md](docs/models.md))_
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\download_models.ps1
+```
+
+- Wan 2.2 TI2V 5B 구성(본체 + VAE + 텍스트 인코더, 약 17GB)을 Hugging Face에서 받아
+  `C:\comfyui\ComfyUI\models\` 아래에 배치한다. 중단돼도 재실행하면 이어받는다.
+- 모델 목록·확장 계획은 [docs/models.md](docs/models.md) 참조.
 
 ### 3. 워크플로우 로드 및 생성
 
