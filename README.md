@@ -47,6 +47,16 @@ powershell -ExecutionPolicy Bypass -File scripts\download_models.ps1
   받아 `C:\comfyui\ComfyUI\models\` 아래에 배치한다. 중단돼도 재실행하면 이어받는다.
 - 모델 목록은 [docs/models.md](docs/models.md) 참조.
 
+### 2-1. 커스텀 노드 설치 (프레임 보간)
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\install_custom_nodes.ps1
+```
+
+- ComfyUI-Frame-Interpolation(RIFE)을 설치한다. 14B 워크플로우의 16fps 출력을
+  32fps로 보간하는 데 쓰인다 (보간 모델 ~50MB는 첫 사용 시 자동 다운로드).
+- 설치 후 ComfyUI를 재시작하고, 열려 있던 브라우저 탭도 새로고침해야 노드가 인식된다.
+
 ### 3. 워크플로우 로드 및 생성
 
 1. `scripts\run_comfyui.ps1` 로 서버 실행 후 브라우저에서 `http://127.0.0.1:8188` 접속
