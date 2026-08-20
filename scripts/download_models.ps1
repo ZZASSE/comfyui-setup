@@ -1,4 +1,4 @@
-# Wan 2.2 TI2V 5B 모델 다운로드 스크립트 (Comfy-Org 공식 리패키지, Hugging Face)
+# Wan 2.2 모델 다운로드 스크립트 — 5B(TI2V) + 14B(I2V fp8 + 4-step LoRA) (Comfy-Org 공식 리패키지, Hugging Face)
 # 사용법:  powershell -ExecutionPolicy Bypass -File scripts\download_models.ps1
 # 파일 목록·역할은 docs\models.md 참조. 이미 받은 파일은 건너뛰고, 중단된 다운로드는 이어받는다.
 
@@ -17,6 +17,12 @@ $Files = @(
     @{ Path = "diffusion_models\wan2.2_ti2v_5B_fp16.safetensors";        Url = "$HF/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors";        Size = 9999658848 }
     @{ Path = "vae\wan2.2_vae.safetensors";                              Url = "$HF/vae/wan2.2_vae.safetensors";                              Size = 1409400960 }
     @{ Path = "text_encoders\umt5_xxl_fp8_e4m3fn_scaled.safetensors";    Url = "$HF/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors";    Size = 6735906897 }
+    # --- Wan 2.2 I2V 14B (fp8) + 16GB VRAM용 4-step 고속화 LoRA ---
+    @{ Path = "diffusion_models\wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"; Url = "$HF/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"; Size = 14294742832 }
+    @{ Path = "diffusion_models\wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors";  Url = "$HF/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors";  Size = 14294742832 }
+    @{ Path = "vae\wan_2.1_vae.safetensors";                                       Url = "$HF/vae/wan_2.1_vae.safetensors";                                       Size = 253815318 }
+    @{ Path = "loras\wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors";   Url = "$HF/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors";   Size = 1226977424 }
+    @{ Path = "loras\wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors";    Url = "$HF/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors";    Size = 1226977424 }
 )
 
 foreach ($f in $Files) {

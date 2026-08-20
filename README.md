@@ -43,15 +43,17 @@ powershell -ExecutionPolicy Bypass -File scripts\run_comfyui.ps1
 powershell -ExecutionPolicy Bypass -File scripts\download_models.ps1
 ```
 
-- Wan 2.2 TI2V 5B 구성(본체 + VAE + 텍스트 인코더, 약 17GB)을 Hugging Face에서 받아
-  `C:\comfyui\ComfyUI\models\` 아래에 배치한다. 중단돼도 재실행하면 이어받는다.
-- 모델 목록·확장 계획은 [docs/models.md](docs/models.md) 참조.
+- Wan 2.2 TI2V **5B**(약 17GB)와 I2V **14B fp8 + 4-step LoRA**(약 31GB)를 Hugging Face에서
+  받아 `C:\comfyui\ComfyUI\models\` 아래에 배치한다. 중단돼도 재실행하면 이어받는다.
+- 모델 목록은 [docs/models.md](docs/models.md) 참조.
 
 ### 3. 워크플로우 로드 및 생성
 
 1. `scripts\run_comfyui.ps1` 로 서버 실행 후 브라우저에서 `http://127.0.0.1:8188` 접속
-2. [workflows/wan2.2_5b_i2v.json](workflows/wan2.2_5b_i2v.json) 을 화면에 드래그해 로드
-   (공식 Wan 2.2 5B TI2V 템플릿 기반, I2V용으로 LoadImage 활성화됨)
+2. 워크플로우 JSON을 화면에 드래그해 로드 (둘 다 공식 템플릿 기반):
+   - [workflows/wan2.2_5b_i2v.json](workflows/wan2.2_5b_i2v.json) — 5B, 빠른 실험용 (24fps, 최대 121프레임)
+   - [workflows/wan2.2_14b_i2v.json](workflows/wan2.2_14b_i2v.json) — 14B 고품질 (16fps, 81프레임≈5초,
+     4-step LoRA 기본 ON. 서브그래프의 `enable_turbo_mode`를 끄면 20스텝 고품질 모드)
 3. **LoadImage** 노드에 시작 이미지 업로드 → 긍정 프롬프트 입력 → **Queue** 실행
 4. 결과는 `C:\comfyui\ComfyUI\output\video\` 에 mp4로 저장됨
 
