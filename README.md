@@ -55,9 +55,14 @@ powershell -ExecutionPolicy Bypass -File scripts\download_models.ps1
 3. **LoadImage** 노드에 시작 이미지 업로드 → 긍정 프롬프트 입력 → **Queue** 실행
 4. 결과는 `C:\comfyui\ComfyUI\output\video\` 에 mp4로 저장됨
 
-기본 설정: 1280×704, 24fps, 121프레임(약 5초), KSampler 20 steps / cfg 5 / uni_pc.
-길이·해상도는 **Wan22ImageToVideoLatent** 노드에서 조절 (49프레임≈2초 테스트 기준
-RTX 5080에서 약 2분 소요, VRAM 여유 충분).
+기본 설정: 24fps, 121프레임(약 5초), KSampler 20 steps / cfg 5 / uni_pc.
+
+- **해상도는 업로드한 이미지의 가로세로비에 자동으로 맞는다**: LoadImage 뒤의
+  `ImageScaleToTotalPixels`(0.9MP, 32배수) → `GetImageSize` 체인이 소스 비율을 유지한
+  최적 해상도를 계산해 latent에 전달한다. 수동 조절이 필요하면 이 두 노드를 지우고
+  Wan22ImageToVideoLatent의 width/height를 직접 입력.
+- 길이는 **Wan22ImageToVideoLatent**의 `length` (4의 배수+1, 121이 학습 상한 ≈ 5초.
+  49≈2초 기준 RTX 5080에서 약 2분 소요, VRAM 여유 충분).
 
 ## repo 구조
 

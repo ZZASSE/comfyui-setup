@@ -1,8 +1,8 @@
 {
   "id": "91f6bbe2-ed41-4fd6-bac7-71d5b5864ecb",
   "revision": 0,
-  "last_node_id": 59,
-  "last_link_id": 108,
+  "last_node_id": 61,
+  "last_link_id": 112,
   "nodes": [
     {
       "id": 37,
@@ -269,6 +269,22 @@
       "mode": 0,
       "inputs": [
         {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 111
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 112
+        },
+        {
           "name": "vae",
           "type": "VAE",
           "link": 105
@@ -277,7 +293,7 @@
           "name": "start_image",
           "shape": 7,
           "type": "IMAGE",
-          "link": 106
+          "link": 110
         }
       ],
       "outputs": [
@@ -552,6 +568,97 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 60,
+      "type": "ImageScaleToTotalPixels",
+      "pos": [
+        0,
+        920
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 106
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            109,
+            110
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.45",
+        "Node name for S&R": "ImageScaleToTotalPixels"
+      },
+      "widgets_values": [
+        "lanczos",
+        0.9,
+        32
+      ]
+    },
+    {
+      "id": 61,
+      "type": "GetImageSize",
+      "pos": [
+        310,
+        920
+      ],
+      "size": [
+        200,
+        88
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 109
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            111
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            112
+          ]
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.45",
+        "Node name for S&R": "GetImageSize"
+      },
+      "widgets_values": []
     }
   ],
   "links": [
@@ -636,14 +743,6 @@
       "VAE"
     ],
     [
-      106,
-      56,
-      0,
-      55,
-      1,
-      "IMAGE"
-    ],
-    [
       107,
       8,
       0,
@@ -658,6 +757,46 @@
       58,
       0,
       "VIDEO"
+    ],
+    [
+      106,
+      56,
+      0,
+      60,
+      0,
+      "IMAGE"
+    ],
+    [
+      109,
+      60,
+      0,
+      61,
+      0,
+      "IMAGE"
+    ],
+    [
+      110,
+      60,
+      0,
+      55,
+      3,
+      "IMAGE"
+    ],
+    [
+      111,
+      61,
+      0,
+      55,
+      0,
+      "INT"
+    ],
+    [
+      112,
+      61,
+      1,
+      55,
+      1,
+      "INT"
     ]
   ],
   "groups": [
@@ -689,12 +828,12 @@
     },
     {
       "id": 3,
-      "title": "For i2v, use Ctrl + B to enable",
+      "title": "I2V input (auto size)",
       "bounding": [
         -50,
         450,
-        400,
-        420
+        580,
+        620
       ],
       "color": "#3f789e",
       "font_size": 24,
