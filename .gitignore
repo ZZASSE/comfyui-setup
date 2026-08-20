@@ -173,9 +173,34 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Cursor  
-#  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to 
+# Cursor
+#  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to
 #  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# ===== comfyui-setup rules =====
+# ComfyUI 본체는 별도 경로(C:\comfyui)에 설치 — repo 안에 들어와도 커밋 금지
+ComfyUI/
+comfyui/
+
+# 모델 가중치 (수십 GB — 스크립트로 다운로드)
+*.safetensors
+*.ckpt
+*.pth
+*.pt
+*.gguf
+*.bin
+*.onnx
+
+# 생성된 영상·이미지
+output/
+outputs/
+*.mp4
+*.webm
+*.webp
+*.gif
+*.png
+*.jpg
+*.jpeg
