@@ -13,6 +13,8 @@ if (-not (Test-Path $CustomNodes)) { throw "$CustomNodes 없음 — 먼저 scrip
 
 $Nodes = @(
     @{ Name = "ComfyUI-Frame-Interpolation"; Zip = "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation/archive/refs/heads/main.zip" }
+    # 이미지 자동 캡셔닝 (업로드 사진 → 배경 묘사 자동 생성. 모델 ~1GB는 첫 사용 시 자동 다운로드)
+    @{ Name = "ComfyUI-Florence2"; Zip = "https://github.com/kijai/ComfyUI-Florence2/archive/refs/heads/main.zip" }
 )
 
 foreach ($n in $Nodes) {

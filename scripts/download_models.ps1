@@ -11,6 +11,7 @@ $ModelsDir = Join-Path $InstallDir "ComfyUI\models"
 if (-not (Test-Path $ModelsDir)) { throw "$ModelsDir 없음 — 먼저 scripts\install_comfyui.ps1 을 실행하세요." }
 
 $HF = "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files"
+$MAGE = "https://huggingface.co/Comfy-Org/Mage-Flow/resolve/main"
 
 # 대상 파일: 상대경로(= models\ 아래 저장 위치), URL, 예상 크기(bytes, 완결성 검사용)
 $Files = @(
@@ -23,6 +24,10 @@ $Files = @(
     @{ Path = "vae\wan_2.1_vae.safetensors";                                       Url = "$HF/vae/wan_2.1_vae.safetensors";                                       Size = 253815318 }
     @{ Path = "loras\wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors";   Url = "$HF/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors";   Size = 1226977424 }
     @{ Path = "loras\wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors";    Url = "$HF/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors";    Size = 1226977424 }
+    # --- Mage Flow edit (이미지 편집 — I2V 시작 이미지에 인물 합성 등 2단계 파이프라인용) ---
+    @{ Path = "diffusion_models\mage_flow_edit_int8_convrot.safetensors"; Url = "$MAGE/diffusion_models/mage_flow_edit_int8_convrot.safetensors"; Size = 4159146848 }
+    @{ Path = "text_encoders\qwen3vl_4b_bf16.safetensors";                Url = "$MAGE/text_encoders/qwen3vl_4b_bf16.safetensors";                Size = 8875719384 }
+    @{ Path = "vae\mage_flow_vae_bf16.safetensors";                       Url = "$MAGE/vae/mage_flow_vae_bf16.safetensors";                       Size = 345053056 }
 )
 
 foreach ($f in $Files) {

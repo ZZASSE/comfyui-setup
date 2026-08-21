@@ -66,10 +66,25 @@ powershell -ExecutionPolicy Bypass -File scripts\install_custom_nodes.ps1
      4-step LoRA 기본 ON. 서브그래프의 `enable_turbo_mode`를 끄면 20스텝 고품질 모드)
    - [workflows/wan2.2_14b_i2v_10s.json](workflows/wan2.2_14b_i2v_10s.json) — 14B **10초** (2구간 이어붙이기)
    - [workflows/wan2.2_14b_i2v_20s.json](workflows/wan2.2_14b_i2v_20s.json) — 14B **20초** (4구간 이어붙이기)
+   - [workflows/mage_edit.json](workflows/mage_edit.json) — Mage 이미지 편집 (아래 2단계 파이프라인)
 
-   이어붙이기 버전은 5초 클립을 자동 생성·연결한다 (각 구간 마지막 프레임 → 다음 구간 시작
-   이미지). 구간별 프롬프트 노드가 따로 있어 시간대마다 다른 동작을 지시할 수 있다.
-   생성 시간은 구간 수에 비례 (1구간 약 4분). 구간이 늘수록 색감·디테일 표류가 누적될 수 있다.
+   **10초/20초 버전 사용법** — 사진과 "동작"만 넣으면 된다:
+   - 사진을 올리면 **Florence-2가 배경·피사체 묘사를 자동 생성**해 모든 구간 프롬프트 앞에
+     붙인다. 각 구간의 `Motion — Segment N` 노드의 `string_b`에는 **그 5초의 동작만** 쓴다.
+     자동 묘사가 마음에 안 들면 `Manual Description`에 직접 쓰고 스위치를 켠다.
+   - 구간별 `Precision Mode` 토글: 기본 OFF(4스텝 터보 + LoRA, 빠름). ON이면 **LoRA를 떼고**
+     20스텝·cfg 3.5로 돌며 부정 프롬프트가 활성화되어 **지시 외 움직임 억제가 먹힌다**.
+     대가가 큼: 실측 기준 정밀 구간 하나에 **약 40분**(터보 구간의 ~10배, 720p 기준).
+     "이 동작만 정확히" 해야 하는 구간에만 아껴서 켤 것.
+   - 각 구간 마지막 프레임이 다음 구간 시작 이미지가 되고, 생성 시간은 구간 수에 비례
+     (터보 1구간 약 4분). 구간이 늘수록 색감·디테일 표류가 누적될 수 있다.
+
+   **2단계 파이프라인 (인물 추가 등 원본에 없는 요소가 필요할 때)**:
+   1. `mage_edit.json`으로 원본 사진을 편집 (예: "add a man standing behind her") →
+      결과 이미지를 저장하고 마음에 들 때까지 반복
+   2. 편집된 이미지를 10초/20초 워크플로우의 시작 이미지로 넣고 동작만 지시
+      (예: "the man behind wraps his arms around her")
+   새 인물을 I2V 프롬프트로 직접 만들게 하는 것보다 성공률이 훨씬 높다.
 3. **LoadImage** 노드에 시작 이미지 업로드 → 긍정 프롬프트 입력 → **Queue** 실행
 4. 결과는 `C:\comfyui\ComfyUI\output\video\` 에 mp4로 저장됨
 

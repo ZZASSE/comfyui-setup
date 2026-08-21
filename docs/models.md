@@ -24,14 +24,29 @@
 | 14B 4-step LoRA (low) | `wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors` | 1.2GB | `C:\comfyui\ComfyUI\models\loras\` |
 | 텍스트 인코더 (공통) | `umt5_xxl_fp8_e4m3fn_scaled.safetensors` | 6.3GB | `C:\comfyui\ComfyUI\models\text_encoders\` |
 
+## Mage Flow edit (2026-08-21 추가)
+
+I2V 2단계 파이프라인용 이미지 편집 모델 (Microsoft, 4B급 int8).
+원본 사진에 인물 추가·배경 교체 등을 먼저 편집한 뒤, 그 결과를 Wan I2V의 시작 이미지로 쓴다.
+출처: [Comfy-Org/Mage-Flow](https://huggingface.co/Comfy-Org/Mage-Flow)
+
+| 역할 | 파일 | 크기 | 설치 경로 |
+| --- | --- | --- | --- |
+| 편집 본체 (int8) | `mage_flow_edit_int8_convrot.safetensors` | 3.9GB | `...\models\diffusion_models\` |
+| 텍스트 인코더 | `qwen3vl_4b_bf16.safetensors` | 8.3GB | `...\models\text_encoders\` |
+| VAE | `mage_flow_vae_bf16.safetensors` | 0.3GB | `...\models\vae\` |
+
+## 커스텀 노드 (scripts\install_custom_nodes.ps1)
+
+- **ComfyUI-Frame-Interpolation** — RIFE 보간 (16→32fps). 가중치 ~50MB 첫 사용 시 자동 다운로드
+- **ComfyUI-Florence2** — 업로드 사진 자동 캡셔닝 (Florence-2-large ~1.5GB 첫 사용 시 자동 다운로드)
+
 ## 워크플로우 대응
 
 | 워크플로우 | 모델 | 용도 |
 | --- | --- | --- |
 | `workflows/wan2.2_5b_i2v.json` | 5B | 빠른 실험, 24fps·최대 121프레임 |
-| `workflows/wan2.2_14b_i2v.json` | 14B fp8 + 4-step LoRA | 고품질 동작, 16fps·81프레임 |
-
-## 보류/후보
-
-- **Mage Flow** (Microsoft, 이미지 생성·편집 4B급): I2V 시작 이미지 제작용으로 궁합 좋음.
-  int8 약 12GB / bf16 약 16GB. 사용자 결정 보류 (2026-08-20).
+| `workflows/wan2.2_14b_i2v.json` | 14B fp8 + 4-step LoRA | 고품질 5초, 32fps 보간 |
+| `workflows/wan2.2_14b_i2v_10s.json` | 14B + Florence-2 | 10초(2구간), 자동 캡션 + 구간별 정밀 모드 |
+| `workflows/wan2.2_14b_i2v_20s.json` | 14B + Florence-2 | 20초(4구간), 자동 캡션 + 구간별 정밀 모드 |
+| `workflows/mage_edit.json` | Mage Flow edit | I2V 시작 이미지 편집 (인물 추가 등) |
