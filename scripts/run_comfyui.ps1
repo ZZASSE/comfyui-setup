@@ -13,4 +13,5 @@ if (-not (Test-Path $Python) -or -not (Test-Path $Main)) {
 }
 
 Set-Location $InstallDir
-& $Python -s $Main --windows-standalone-build
+# --reserve-vram 1.0 : 화면 표시용 VRAM 1GB 예약 — 생성 중 데스크톱 끊김 완화
+& $Python -s $Main --windows-standalone-build --reserve-vram 1.0
